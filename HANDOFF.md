@@ -6,6 +6,11 @@ Stage 9, written by the agent. `C5 Consolidate in your own words`. A fresh sessi
 
 Spins is a two-player tavern wheels game after Sea of Stars' Wheels, played in the browser against a computer opponent. One Rust engine runs three views: 2D in Lowballer's look, 3D in Protection of the Spheres' look, and pixel. It lives in the public repository `sgilson7/spins` and is published at https://sgilson7.github.io/spins/.
 
+## Where it is live
+
+- https://sgilson7.github.io/spins/ (chooser), `/spins/2d/`, `/spins/3d/`, `/spins/pixel/`, from the `gh-pages` branch (`./scripts/publish.sh`). The browser check against the live address passed in Chromium, Firefox and WebKit, one engine file across the views.
+- Listed at https://sgilson7.github.io/projects/spins/ and on `/games/` under 2D, from the website repository (`../../website`, commit f8c8e76, not pushed: that repository's source is never pushed). Deployed with its `make deploy` from a worktree, and its `make gate-live` passed (R2.13).
+
 ## Rules that hold it up
 
 | Rule | Guarded by |
