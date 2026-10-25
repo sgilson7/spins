@@ -24,9 +24,15 @@ What a new session gets wrong first.
 
 ## The journal
 
+`../spins-journal/index.html`, published privately at https://claude.ai/artifact/Hsf1RJnsLwYdLUxGX2CQbc. Newest entry: tab 3, decisions SP-Q5 to SP-Q20 (2026-10-24).
+
 Where the design journal is, its link if it is published, and its newest entry.
 
 ## Open for the person
+
+- R1.2: the cut-off sentence in the description (journal tab 2, SP-Q7).
+- R1.3: XP and evolution from Sea of Stars (SP-Q5, SP-Q6).
+- R1.4: rename the placeholder opponents and taverns (SP-Q15).
 
 Every `SECOND-ORDER.md` row with status *person*, by number, with what the person has to decide or supply. `scripts/notebook_check.py` fails while one is missing.
 
