@@ -52,6 +52,24 @@ fn files_under(dir: &Path) -> Vec<PathBuf> {
     out
 }
 
+/// Project change to D17 (T3, from SP-Q17; BUILDER-SPEC.md): one file may
+/// keep the core's save text in localStorage, and nothing else may.
+const ALLOWED_STORAGE: &[(&str, &str)] = &[("web/shared/save.js", "localStorage")];
+
+fn allowed(path: &Path, name: &str) -> bool {
+    let p = path.to_string_lossy().replace('\\', "/");
+    ALLOWED_STORAGE
+        .iter()
+        .any(|(file, n)| p.ends_with(file) && *n == name)
+}
+
+#[test]
+fn only_the_save_file_may_name_storage_and_only_local_storage() {
+    assert!(allowed(Path::new("/x/web/shared/save.js"), "localStorage"));
+    assert!(!allowed(Path::new("/x/web/shared/save.js"), "indexedDB"));
+    assert!(!allowed(Path::new("/x/web/shared/board.js"), "localStorage"));
+}
+
 #[test]
 fn the_page_names_no_browser_storage() {
     let web = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../web");
@@ -61,7 +79,9 @@ fn the_page_names_no_browser_storage() {
             continue;
         };
         for name in storage_names_in(&text) {
-            found.push(format!("{}: {name}", path.display()));
+            if !allowed(&path, name) {
+                found.push(format!("{}: {name}", path.display()));
+            }
         }
     }
     assert!(

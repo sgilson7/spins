@@ -31,7 +31,16 @@
 
 ## Rules agreed for this project
 
-None yet. When the person answers the opening entry's questions, add each rule that applies to every later session here, with its journal ID.
+Agreed 2026-10-24 (journal tab 1, SP-1 to SP-12; the person answered SP-Q13, Q14, Q17, Q18 and Q19, and accepted the other defaults):
+
+- SP-1. All three views load one `spins.wasm`; no view has an engine of its own. Held by the browser check (one wasm file across views).
+- SP-2. No view holds a rule. Views copy numbers from the core's table and events and animate them. Held by the page scans.
+- SP-3. The computer opponent reads only its own side and `ai::Public` of yours, which holds no faces. Held by `every_skill_decides_the_same_whatever_your_faces`.
+- SP-4. The opponent's faces never reach the page before the reveal. Held by `the_opponents_faces_never_reach_the_page_before_the_reveal`.
+- SP-8. Only `web/shared/save.js` may use browser storage (T3). Held by `no_storage.rs`.
+- SP-9. No subagents, in this session or a later one, unless the person says otherwise.
+- SP-11. Deploy only to `sgilson7/spins` (GitHub Pages) and the listing on sgilson7.github.io, after a passing `./scripts/check.sh`, then run the browser check against the live address.
+- SP-12. Every visible change, decision for the person, divergence and deploy gets a journal entry in `../spins-journal/`, citing its rows.
 
 ## Stopping
 

@@ -64,4 +64,8 @@ These stay with the person and go in `BRIEF.md` or `PLAN.md`:
 
 | Default | Changed to | Reason | Recorded in |
 | --- | --- | --- | --- |
-| | | | |
+| D1 kit choice | the realtime kit's `rng.rs` in the core; POTS's `fx.rs`, `geom.rs`, `mesh.rs`, `render.rs`, `web/3d/gl.js` and shaders for the 3D view | one seeded engine; a 3D view that holds no number in its page | SECOND-ORDER.md R1.6, R2.4 |
+| R1 layout (not a change to R1) | a second Rust crate, `crates/view3d`, builds the 3D view's instances from the core's table JSON; it decides nothing and is held to the core's no-I/O, no-float scan and allowlist | the 3D view meets D3 the way POTS does | `view3d_is_held_to_the_core_rules` in `boundary.rs`; R2.4 |
+| D17 (no browser storage) | `web/shared/save.js` alone may use `localStorage`, for the one save text the core writes (wins, losses, oak wheels) | the person asked for progress kept between visits (T3, from SP-Q17) | `only_the_save_file_may_name_storage_and_only_local_storage` in `no_storage.rs`; R2.3 |
+| D18 (default style pack) | each view has its own stylesheet and pictures: `web/2d/` (Lowballer's look), `web/pixel/` (sprites from `tools/pixel/sprites.py`, a vendored VT323 font), `web/3d/` (POTS's look) | the brief names a style | R2.5 |
+| D11 (release profile) | `codegen-units = 1`, `panic = "abort"` added; `opt-level` stays `"s"` (`"z"` was larger) | size: the wasm is shared by three views | MEASUREMENTS.md; R2.6 |

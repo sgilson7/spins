@@ -1,4 +1,182 @@
 {
-  "title": "A new Builder tool",
-  "intro": "Replace this text in data/strings.json, and replace the placeholder rule in crates/core/src/page.rs with the rules your brief describes."
+  "title": {
+    "": "Spins",
+    "tagline": "A game of five wheels, played in taverns.",
+    "record": "Your record at the tavern: {wins} won of {played} played."
+  },
+  "action": {
+    "play": "Play",
+    "rules": "How to play",
+    "back": "Back",
+    "pick": "Seat this Legend",
+    "unpick": "Stand down",
+    "swap": "Swap Red and Blue",
+    "next": "Choose an opponent",
+    "sit": "Sit down",
+    "rematch": "Rematch",
+    "tavern": "Back to the tavern",
+    "title": "Title",
+    "spin": "Spin {n} of {of}",
+    "end": "End turn",
+    "leave": "Leave the table",
+    "lock": "Lock wheel {n}",
+    "unlock": "Unlock wheel {n}",
+    "forget": "Forget my record"
+  },
+  "notice": {
+    "save_refused": "The saved record could not be read, so this visit starts fresh.",
+    "oak_locked": "Oak wheels are won by beating the tavern's champion.",
+    "oak_won": "You won a set of oak wheels. Choose them when you seat your Legends.",
+    "pick_two": "Seat two Legends first."
+  },
+  "rules": {
+    "heading": "How to play",
+    "1": "You and your opponent each start with {health} health. Bring theirs to none.",
+    "2": "Each turn you have {spins} spins of your {wheels} wheels. The first spin turns them all.",
+    "3": "Between spins, lock the wheels you want to keep. You can unlock them again before the next spin.",
+    "4": "Your opponent's wheels stay covered until the turn ends. Then both sides show.",
+    "5": "Red symbols are squares, blue are diamonds, Barricade symbols are hammers. A panel can show one or two.",
+    "6": "{oak}oak+: {oak} symbols of a kind make one segment, and each symbol after that makes one more.",
+    "7": "Barricade segments stack up to {barricade.max} and block damage one for one. Energy segments fill your Legends' bars.",
+    "8": "A full bar acts at the end of the turn: Knight {knight.cost}, Wizard {wizard.cost}, Bowman {bowman.cost} segments.",
+    "9": "Gilded panels give XP. At {xp.max} XP a Legend evolves from Bronze to Silver to Gold and hits harder."
+  },
+  "prof": {
+    "bar": "Energy bar: {cost} segments",
+    "knight": {
+      "name": "Knight",
+      "does": "Strikes once for {knight.damage}. A Barricade takes the whole blow."
+    },
+    "wizard": {
+      "name": "Wizard",
+      "does": "Two bolts of {wizard.damage}. The second flies over any Barricade."
+    },
+    "bowman": {
+      "name": "Bowman",
+      "does": "An arrow for {bowman.damage} at height {bowman.height}: over a lower Barricade, or {bowman.chip} off a taller one."
+    }
+  },
+  "seat": {
+    "red": "Red Legend",
+    "blue": "Blue Legend"
+  },
+  "legends": {
+    "heading": "Seat your Legends",
+    "help": "The first Legend you seat sits Red, on your left. The second sits Blue, on your right."
+  },
+  "grade": {
+    "pine": {
+      "name": "Pine wheels",
+      "line": "Pine wheels"
+    },
+    "oak": {
+      "name": "Oak wheels",
+      "line": "Oak wheels, with more doubles"
+    }
+  },
+  "tavern": {
+    "name": "The Wagon Wheel",
+    "help": "Three players are looking for a game. Halvard is the tavern's champion."
+  },
+  "opponent": {
+    "legends": "Plays {red} and {blue}",
+    "record": "You won {wins}, lost {losses}",
+    "wenna": {
+      "name": "Old Wenna",
+      "about": "Locks whatever she likes the look of."
+    },
+    "tobble": {
+      "name": "Brother Tobble",
+      "about": "Chases his fullest bar and stops when it is full."
+    },
+    "halvard": {
+      "name": "Halvard",
+      "about": "Counts your Barricade and weighs every lock."
+    }
+  },
+  "skill": {
+    "easy": "Easy",
+    "fair": "Fair",
+    "hard": "Hard, the champion"
+  },
+  "over": {
+    "win": "You win",
+    "loss": "You lose",
+    "draw": "A draw",
+    "turn": "The match ended on turn {turn} against {name}.",
+    "health": "Your health {you}, {name}'s health {them}.",
+    "acts": "Your {legend} acted {n} times."
+  },
+  "you": {
+    "who": "You",
+    "whose": "Your",
+    "name": "You"
+  },
+  "them": {
+    "whose": "{name}'s"
+  },
+  "sym": {
+    "red": "red",
+    "blue": "blue",
+    "barricade": "Barricade"
+  },
+  "level": {
+    "0": "Bronze",
+    "1": "Silver",
+    "2": "Gold"
+  },
+  "event": {
+    "reveal": "The covers lift.",
+    "count": "{who}: {symbols} {sym} symbols make {segments}.",
+    "barricade": "{whose} Barricade rises to {value}.",
+    "energy": "{whose} {legend} fills to {value} of {cost}.",
+    "xp": "{whose} {legend} gains {added} XP.",
+    "evolve": "{whose} {legend} evolves to {level}.",
+    "burst": "{whose} Gold {legend} strikes {foe} for {amount}.",
+    "act": "{whose} {legend} acts.",
+    "hit": {
+      "barricade": "It breaks {amount} of {foes} Barricade.",
+      "health": "It hits {foe} for {amount}.",
+      "over": "It flies over the Barricade and hits {foe} for {amount}."
+    },
+    "over": {
+      "win": "You win the match.",
+      "loss": "You lose the match.",
+      "draw": "Both fall on the same turn: a draw."
+    }
+  },
+  "prompt": {
+    "start": "Turn {turn}. Spin your wheels.",
+    "lock": "Lock the wheels to keep, then spin. {left} left, or end the turn.",
+    "all_locked": "Every wheel is locked. End the turn."
+  },
+  "table": {
+    "health": "Health",
+    "barricade": "Barricade",
+    "energy": "Energy",
+    "xp": "XP",
+    "covered": "Covered",
+    "spins": "Spins",
+    "turn": "Turn",
+    "log": "What happened"
+  },
+  "tally": {
+    "count": "{symbols} → {segments}"
+  },
+  "page": {
+    "loading": "Setting up the table",
+    "nogl": "This view needs WebGL 2. The 2D views work in any browser.",
+    "views": "Views",
+    "view2d": "2D",
+    "view3d": "3D",
+    "viewpixel": "Pixel",
+    "sound_on": "Sound on",
+    "sound_off": "Sound off",
+    "skip": "Skip",
+    "pick": "Choose how to see the table.",
+    "same": "All three views run the same game engine; only the drawing differs.",
+    "about2d": "Flat and bold, in page elements. The lightest load.",
+    "about3d": "Carved figures on a candlelit table, in WebGL 2.",
+    "aboutpixel": "Chunky pixels and stepped wheels."
+  }
 }

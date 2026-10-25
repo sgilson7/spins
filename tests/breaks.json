@@ -1,16 +1,128 @@
 [
-  {
-    "name": "an empty title is refused",
-    "file": "crates/core/src/page.rs",
-    "find": "if strings.title.trim().is_empty() {",
-    "replace": "if false {",
-    "test": "an_empty_title_is_rejected_by_name"
-  },
-  {
-    "name": "an unknown action is refused",
-    "file": "crates/core/src/api.rs",
-    "find": "other => return Err(format!(\"Unknown action \\\"{other}\\\".\")),",
-    "replace": "_ => {}",
-    "test": "act_refuses_an_unknown_action"
-  }
+ {
+  "name": "3oak+ makes one segment from three symbols",
+  "file": "crates/core/src/rules.rs",
+  "find": "symbols - (OAK - 1)",
+  "replace": "symbols - OAK",
+  "test": "three_reds_make_one_segment"
+ },
+ {
+  "name": "gilded panels give XP",
+  "file": "crates/core/src/rules.rs",
+  "find": "t.red_gilded += p.gilded as i32;",
+  "replace": "",
+  "test": "gilded_panels_are_counted_once_each_whatever_their_symbols"
+ },
+ {
+  "name": "Knight bar holds three",
+  "file": "crates/core/src/rules.rs",
+  "find": "Prof::Knight => 3,",
+  "replace": "Prof::Knight => 4,",
+  "test": "bars_hold_three_five_and_four"
+ },
+ {
+  "name": "a Barricade takes the Knight's blow",
+  "file": "crates/core/src/rules.rs",
+  "find": "        if *b > 0 {",
+  "replace": "        if *b > 99 {",
+  "test": "the_knight_hits_any_barricade_and_nothing_carries_over"
+ },
+ {
+  "name": "the Bowman's arrow flies at height three",
+  "file": "crates/core/src/rules.rs",
+  "find": "if *barricade >= BOWMAN_HEIGHT {",
+  "replace": "if *barricade >= 1 {",
+  "test": "the_bowman_passes_a_barricade_of_two_and_chips_one_of_three"
+ },
+ {
+  "name": "the Wizard's second bolt reaches health",
+  "file": "crates/core/src/rules.rs",
+  "find": "            wall_first(barricade, health, to_health, &mut hits);\n            let over",
+  "replace": "            wall_first(barricade, health, to_health, &mut hits);\n            wall_first(barricade, health, to_health, &mut hits);\n            let over",
+  "test": "the_wizards_second_bolt_flies_over_the_barricade"
+ },
+ {
+  "name": "a new turn unlocks every wheel",
+  "file": "crates/core/src/table.rs",
+  "find": "                s.locks = [false; WHEELS];",
+  "replace": "",
+  "test": "a_new_turn_starts_with_every_wheel_unlocked"
+ },
+ {
+  "name": "a locked wheel keeps its face",
+  "file": "crates/core/src/table.rs",
+  "find": "if !self.locks[w] {",
+  "replace": "if true {",
+  "test": "locks_wait_for_the_first_spin_and_hold_a_wheel_still"
+ },
+ {
+  "name": "the Barricade stops at five",
+  "file": "crates/core/src/table.rs",
+  "find": ".min(rules::BARRICADE_MAX);",
+  "replace": ";",
+  "test": "a_barricade_stops_at_five"
+ },
+ {
+  "name": "energy past a full bar is dropped",
+  "file": "crates/core/src/table.rs",
+  "find": ".min(l.prof.cost());",
+  "replace": ";",
+  "test": "energy_past_a_full_bar_is_dropped"
+ },
+ {
+  "name": "a bar empties after acting",
+  "file": "crates/core/src/table.rs",
+  "find": "self.sides[side].legends[slot].energy = 0;",
+  "replace": "",
+  "test": "the_end_of_a_turn_builds_fills_and_attacks_in_order"
+ },
+ {
+  "name": "both at none is a draw",
+  "file": "crates/core/src/table.rs",
+  "find": "(true, true) => Some(Outcome::Draw),",
+  "replace": "(true, true) => Some(Outcome::Win),",
+  "test": "both_at_zero_on_one_turn_is_a_draw"
+ },
+ {
+  "name": "six XP evolves a Legend",
+  "file": "crates/core/src/table.rs",
+  "find": "l.level += 1;",
+  "replace": "",
+  "test": "six_xp_evolves_a_legend_and_a_gold_legend_bursts"
+ },
+ {
+  "name": "the opponent sees no faces",
+  "file": "crates/core/src/ai.rs",
+  "find": "            health: s.health,\n            barricade: s.barricade,",
+  "replace": "            health: s.health + s.faces[0] as i32,\n            barricade: s.barricade,",
+  "test": "what_the_opponent_sees_of_you_holds_no_faces"
+ },
+ {
+  "name": "the opponent's faces stay out of the page",
+  "file": "crates/core/src/api.rs",
+  "find": "let covered = i == 1 && m.outcome.is_none();",
+  "replace": "let covered = false;",
+  "test": "the_opponents_faces_never_reach_the_page_before_the_reveal"
+ },
+ {
+  "name": "a broken save is refused",
+  "file": "crates/core/src/save.rs",
+  "find": "Ok(mut p) if p.version == VERSION => {",
+  "replace": "Ok(mut p) => {",
+  "test": "no_save_is_a_fresh_start_and_a_broken_one_is_refused"
+ },
+ {
+  "name": "only the save file may name storage",
+  "file": "crates/core/tests/no_storage.rs",
+  "find": "p.ends_with(file) && *n == name",
+  "replace": "p.ends_with(file) || *n == name",
+  "test": "only_the_save_file_may_name_storage_and_only_local_storage"
+ },
+ {
+  "name": "view3d is scanned like the core",
+  "file": "crates/core/tests/boundary.rs",
+  "find": "            &scan_core_code(&fs::read_to_string(f).expect(\"read source\")),",
+  "replace": "            &scan_core_code(&fs::read_to_string(f).expect(\"read source\").replace(\"i32\", \"f32\")),",
+  "test": "view3d_is_held_to_the_core_rules"
+ }
 ]

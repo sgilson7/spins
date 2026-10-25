@@ -10,5 +10,6 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 tool_core = { path = "../core" }
+spins_view3d = { path = "../view3d" }
 # Pinned exactly: the wasm-bindgen CLI that builds the page must match this.
 wasm-bindgen = "=0.2.127"

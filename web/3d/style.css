@@ -1,0 +1,89 @@
+/* The 3D view's page layer, in Protection of the Spheres' look: soft cream
+   cards with round corners and a gentle shadow over a candlelit table. */
+:root {
+  --bg: #2e1e16;
+  --card: #fbf3e4;
+  --ink: #2b1d17;
+  --muted: #7b6556;
+  --focus: #6aa2d6;
+  --red: #c8422e;
+  --blue: #346caa;
+  --gilt: #e2b240;
+  --wood: #a8703f;
+  --wood-dk: #6e4626;
+  --walnut: #5c3a24;
+  --skin: #f0c8a0;
+  --steel: #b8c0ca;
+  --line: 0px;
+  --radius: 16px;
+  --display: "Avenir Next", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --soft: 0 6px 18px rgba(0, 0, 0, .35);
+}
+body { color: var(--card); }
+.ink { stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.f-red { fill: var(--red); } .f-blue { fill: var(--blue); } .f-gilt { fill: var(--gilt); } .f-wood { fill: var(--wood); }
+.f-wood-dk { fill: var(--wood-dk); } .f-walnut { fill: var(--walnut); } .f-skin { fill: var(--skin); } .f-steel { fill: var(--steel); }
+.f-ink { fill: var(--ink); } .f-none { fill: none; } .f-seat { fill: var(--seat, var(--wood)); } .f-cheek { fill: #f09a90; opacity: .7; }
+.brand { color: var(--card); font-weight: 700; }
+.views a { background: rgba(251, 243, 228, .12); color: var(--card); border: 0; }
+.views a[aria-current="page"] { background: var(--card); color: var(--ink); }
+button.act, #sound, #skip { background: var(--card); color: var(--ink); border: 0; border-radius: 999px; padding: 8px 16px; box-shadow: var(--soft); font-weight: 600; }
+button.act.primary { background: var(--red); color: var(--card); }
+button.act.on { background: var(--gilt); }
+button.act.quiet, #sound, #skip { background: rgba(251, 243, 228, .16); color: var(--card); box-shadow: none; }
+button:disabled { opacity: .45; cursor: default; }
+
+.panel { background: var(--card); color: var(--ink); border-radius: var(--radius); box-shadow: var(--soft); }
+.kind-sign { background: linear-gradient(var(--wood), var(--wood-dk)); color: var(--card); }
+.kind-sign h2 { text-shadow: 0 4px 0 rgba(0, 0, 0, .3); }
+.kind-card[data-mark="red"] { --seat: var(--red); outline: 4px solid var(--red); }
+.kind-card[data-mark="blue"] { --seat: var(--blue); outline: 4px solid var(--blue); }
+.kind-card .art { width: 110px; height: 132px; }
+.kind-bar { background: rgba(251, 243, 228, .92); }
+
+.play { position: relative; }
+.stage { position: relative; width: 100%; aspect-ratio: 16 / 9; max-height: calc(100vh - 80px); border-radius: 20px; overflow: hidden; box-shadow: var(--soft); background: #2e1e16; }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hud { position: absolute; left: 12px; display: grid; gap: 6px; padding: 8px 12px; background: rgba(251, 243, 228, .9); color: var(--ink); border-radius: 14px; box-shadow: var(--soft); font-size: 14px; max-width: 300px; }
+.hud.them { top: 12px; }
+.hud.you { bottom: 12px; }
+.hud .who { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.hud .wall { padding: 1px 8px; background: var(--wood); color: var(--card); border-radius: 999px; }
+.hud .legends { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.leg { display: flex; gap: 6px; align-items: center; --seat: var(--wood); }
+.leg.seat-red { --seat: var(--red); }
+.leg.seat-blue { --seat: var(--blue); }
+.leg .face { width: 30px; height: 36px; }
+.leg .txt { display: grid; gap: 2px; }
+.leg .level { font-size: 12px; color: var(--muted); }
+.health, .energy, .xp { display: inline-flex; gap: 2px; }
+.health i, .energy i, .xp i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #d9cbb4; }
+.health i.on { background: var(--red); }
+.energy i { width: 12px; border-radius: 3px; }
+.leg.seat-red .energy i.on { background: var(--red); }
+.leg.seat-blue .energy i.on { background: var(--blue); }
+.xp i { width: 6px; height: 6px; }
+.xp i.on { background: var(--gilt); }
+.locks { position: absolute; inset: 0; pointer-events: none; }
+.locks button { position: absolute; transform: translate(-50%, 0); pointer-events: auto; font-size: 12px; padding: 4px 10px; display: inline-flex; gap: 4px; align-items: center; white-space: nowrap; }
+.lock-icon { width: 14px; height: 14px; }
+.controls { position: absolute; right: 12px; bottom: 12px; display: grid; gap: 6px; justify-items: center; padding: 10px 14px; background: rgba(251, 243, 228, .92); color: var(--ink); border-radius: 16px; box-shadow: var(--soft); max-width: 360px; }
+.counts { display: flex; gap: 10px; }
+.count { display: inline-flex; gap: 4px; align-items: center; padding: 1px 8px; border-radius: 999px; }
+.count.pays { background: var(--gilt); }
+.count .sym { width: 18px; height: 18px; }
+.prompt { margin: 0; font-size: 14px; text-align: center; }
+.log { position: absolute; right: 12px; top: 12px; width: 260px; max-height: 40%; overflow: hidden; margin: 0; padding: 8px 10px 8px 26px; background: rgba(20, 12, 8, .55); color: var(--card); border-radius: 14px; font-size: 13px; display: grid; gap: 3px; align-content: start; }
+.log li:first-child { color: var(--gilt); font-weight: 600; }
+@media (max-width: 860px) {
+  .stage { aspect-ratio: 3 / 4; max-height: none; }
+  .hud { font-size: 12px; max-width: calc(100% - 24px); }
+  .controls { position: static; max-width: none; margin-top: 10px; }
+  .stage { aspect-ratio: 3 / 4; }
+  .locks button { font-size: 12px; padding: 3px 7px; }
+  .log { display: none; }
+}
+.controls button.act.quiet { color: var(--ink); background: rgba(43, 29, 23, .08); }
+.log:empty { display: none; }
+.locks button { font-size: 14px; padding: 4px 10px; }

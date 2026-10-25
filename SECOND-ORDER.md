@@ -14,6 +14,17 @@ One row per assumption, surprise or open item. **Kind** is *divergence* (what wa
 | R1.4 | worklist | Opponent and tavern names are needed for the screens. | I made up Old Wenna, Brother Tobble, Halvard, The Wagon Wheel, The Leaky Keg and The Crown as placeholders. | Listed in tab 3 (SP-Q15) for the person to rename. | | person |
 | R1.5 | finding | Wheel strips were not given. | Chose 8 panels per wheel, the same eight on each wheel in different orders (SP-Q14). | Balance run of 1,000 matches before any tuning. | | open |
 | R1.6 | finding | "Protection of the spheres" is a Sam game. | It is `sgilson7/pots` (`OGDota/` on this Mac); its renderer meets D3 by building Q16 instances in Rust. | The 3D view copies POTS's renderer files into `crates/view3d` and `web/3d/`. | | done |
+| R2.1 | finding | Matches would last about eight turns, as in Sea of Stars. | On the person's ten-panel wheel, 1,000 computer matches last 3.3 to 4.9 turns on average, and 21% to 41% end in a draw (`cargo test --release --test balance -- --nocapture`). With XP turned off it is still 3.7 turns and 36% draws, so the wheel and the simultaneous end of turn set the pace, not XP. | Nothing tuned: the strip is the person's (T2). Options for the person: fewer energy panels or a blank panel; more health; a tiebreak for SP-Q9. | `matches_last_a_handful_of_turns_and_skill_tells` holds the report's bounds | person |
+| R2.2 | finding | The 2D wheels could be rebuilt on every draw. | Rebuilding re-parented the strips and cancelled their CSS spin mid-flight. | `board.js` builds the table once per match and updates it in place. | | done |
+| R2.3 | divergence | D17: no browser storage. | The person chose to keep progress (T3). | One file, `web/shared/save.js`, may name `localStorage`; the test allows nothing else. | `no_storage.rs` | done |
+| R2.4 | finding | The 3D view needs numbers in its page. | POTS shows the way: a Rust crate builds Q16 instances; the page only uploads them. | `crates/view3d`, scanned like the core. | `view3d_is_held_to_the_core_rules` | done |
+| R2.5 | divergence | One look per view, drawn by hand. | The pixel view's sprites are text grids turned into SVG by `tools/pixel/sprites.py`, so they stay editable as source. | | | done |
+| R2.6 | divergence | SP-10: wasm under 250 KB. | It is 404 KB raw and 113 KB gzipped, as GitHub Pages serves it. `opt-level = "z"` made it 441 KB. `wasm-opt` is not installed here. | Budget missed as written; each view loads 131 to 143 KB gzipped in all, under SP-10's page budgets. | MEASUREMENTS.md | person |
+| R2.7 | worklist | Every request concerns Spins. | During the build the person wrote "you should also be able to edit your lands deck". Spins has no deck or lands; it reads like the MTG Hand of Fate project. | Not built; asked (T6). | | person |
+| R2.8 | finding | `locks_wait_for_the_first_spin…` covered "the first spin turns all five wheels". | The break was not caught: `spin()` cleared locks that the end of the turn had already cleared. | Removed the duplicate; `a_new_turn_starts_with_every_wheel_unlocked` holds the rule, and its break is caught. | `tests/breaks.json` | done |
+| R2.9 | finding | `energy_past_a_full_bar_is_dropped` covered overflow. | The break was not caught: a full bar acts and empties either way. | The test now reads the energy event's value (3 of 3), which carrying over would change. | `tests/breaks.json` | done |
+| R2.10 | finding | The browser check could compare a wheel's CSS position before and after a locked spin. | It raced the animation frame that sets the position. | The board stamps the core's face on each strip (`data-face`), and the check reads that. | `tests/browser/interactions.py` | done |
+| R2.11 | finding | The chooser's thumbnails could sit in `web/img/`. | The page scan reads every file under `web/` as text and failed on binary images. | Moved to `data/img/`; the scan is unchanged. | | done |
 
 ## Strings written by the agent
 
@@ -21,3 +32,4 @@ Each reader-visible string the agent wrote, with its key, for the person to read
 
 | Key | String |
 | --- | --- |
+| `data/strings.json` (all keys) | Every string in the file was written by the agent from the brief's words; the opponent and tavern names are placeholders (R1.4). |

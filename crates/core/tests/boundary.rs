@@ -669,6 +669,37 @@ fn core_dependencies_are_on_the_allowlist() {
     );
 }
 
+/// Project change (SP-1, BUILDER-SPEC.md): `crates/view3d`, the 3D view's
+/// scene builder, is held to the core's rules too: no I/O, no floats, and
+/// the same dependency allowlist.
+#[test]
+fn view3d_is_held_to_the_core_rules() {
+    let toml =
+        fs::read_to_string(repo_root().join("crates/view3d/Cargo.toml")).expect("read view3d Cargo.toml");
+    let outside: Vec<String> = declared_dependencies(&toml)
+        .into_iter()
+        .filter(|d| !ALLOWED_DEPENDENCIES.contains(&d.as_str()) && d != "tool_core")
+        .collect();
+    assert!(
+        outside.is_empty(),
+        "view3d dependencies outside the allowlist: {outside:?}"
+    );
+    let files = rust_files_under(&repo_root().join("crates/view3d/src"));
+    assert!(!files.is_empty(), "no view3d source found");
+    let mut problems = Vec::new();
+    for f in &files {
+        problems.extend(report(
+            f,
+            &scan_core_code(&fs::read_to_string(f).expect("read source")),
+        ));
+    }
+    assert!(
+        problems.is_empty(),
+        "view3d rule violations:\n{}",
+        problems.join("\n")
+    );
+}
+
 #[test]
 fn core_source_has_no_io_and_no_nondeterminism() {
     let src_dir = repo_root().join("crates/core/src");

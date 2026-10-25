@@ -1,0 +1,12 @@
+[package]
+name = "spins_view3d"
+version = "0.1.0"
+edition = "2021"
+description = "The 3D view's scene: builds WebGL instances from the core's table. No input or output."
+publish = false
+
+# Held to the core's allowlist by view3d_is_held_to_the_core_rules in
+# crates/core/tests/boundary.rs.
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

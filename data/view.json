@@ -1,0 +1,16 @@
+{
+  "_note": "Presentation timings for every view, in milliseconds. fast_flag in the address (?fast) multiplies every wait by fast_scale, for the browser check.",
+  "spin_ms": 820,
+  "stagger_ms": 110,
+  "settle_ms": 450,
+  "event_ms": {
+    "reveal": 900, "count": 650, "barricade": 420, "energy": 360, "xp": 240,
+    "evolve": 900, "act": 360, "hit": 720, "burst": 820, "over": 900, "other": 300
+  },
+  "fast_flag": "fast",
+  "fast_scale": 0,
+  "strip_copies": 4,
+  "spin_copy": 2,
+  "log_lines": 8,
+  "keys": { "lock": ["1", "2", "3", "4", "5"], "spin": " ", "end": "Enter" }
+}

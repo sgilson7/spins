@@ -1,12 +1,14 @@
 [workspace]
 resolver = "2"
-members = ["crates/core", "crates/shim"]
+members = ["crates/core", "crates/view3d", "crates/shim"]
 
 # Reference default (D11). Size first; a project with a per-frame loop may
 # change opt-level to 3 and add codegen-units = 1, recorded in BUILDER-SPEC.md.
 [profile.release]
 opt-level = "s"
 lto = true
+codegen-units = 1
+panic = "abort"
 
 # Whole-game tests in unoptimised integer maths get slow enough to stop being
 # run. Overflow checks stay on.
