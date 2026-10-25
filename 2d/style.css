@@ -1,0 +1,93 @@
+/* The 2D view in Lowballer's look: flat warm colour, thick ink outlines,
+   offset solid shadows, a heavy rounded display face. The tavern is in the
+   materials: parchment ground, wood, brass. */
+:root {
+  --bg: #f4dfb8;
+  --card: #fff4de;
+  --ink: #2e1f2b;
+  --muted: #6b5560;
+  --focus: #2f73b5;
+  --red: #d9472b;
+  --blue: #2f73b5;
+  --gilt: #eab53b;
+  --wood: #c98a4b;
+  --wood-dk: #8a5530;
+  --walnut: #6d4428;
+  --oak: #9a6634;
+  --birch: #f0dcae;
+  --steel: #b9c2cc;
+  --skin: #f3c99d;
+  --felt: #7d9c62;
+  --shadow: 5px 5px 0 var(--ink);
+  --line: 3px;
+  --radius: 14px;
+  --display: "Arial Rounded MT Bold", "Trebuchet MS", "Avenir Next", system-ui, sans-serif;
+  --body: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+.ink { stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.thin { stroke: var(--ink); stroke-width: 1.5; }
+.f-red { fill: var(--red); } .f-blue { fill: var(--blue); } .f-gilt { fill: var(--gilt); }
+.f-wood { fill: var(--wood); } .f-wood-dk { fill: var(--wood-dk); } .f-walnut { fill: var(--walnut); }
+.f-oak { fill: var(--oak); } .f-birch { fill: var(--birch); } .f-steel { fill: var(--steel); }
+.f-skin { fill: var(--skin); } .f-ink { fill: var(--ink); } .f-none { fill: none; }
+.f-shine { fill: #fff; opacity: .45; }
+.f-seat { fill: var(--seat, var(--wood)); }
+
+button.act, #sound, #skip { color: var(--ink); background: var(--card); border: var(--line) solid var(--ink); border-radius: 10px; padding: 7px 14px; box-shadow: 3px 3px 0 var(--ink); font-family: var(--display); }
+button.act:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+button.act.primary { background: var(--red); color: var(--card); }
+button.act.quiet, #sound, #skip { box-shadow: none; border-width: 2px; }
+button.act.on { background: var(--gilt); }
+button:disabled { opacity: .45; cursor: default; box-shadow: none; }
+
+.panel { background: var(--card); border: var(--line) solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow); }
+.kind-sign { background: var(--wood); color: var(--card); }
+.kind-sign h2 { text-shadow: 4px 4px 0 var(--ink); letter-spacing: .04em; }
+.kind-card[data-mark="red"] { --seat: var(--red); background: #fde3d8; }
+.kind-card[data-mark="blue"] { --seat: var(--blue); background: #dce9f6; }
+.kind-card[data-mark] { transform: translateY(-6px); }
+.kind-notice { background: #fbe9c6; transform: rotate(-1deg); }
+.kind-notice:nth-child(odd) { transform: rotate(1.2deg); }
+.kind-scroll { background: var(--card); border-radius: 6px 6px 22px 22px; }
+.kind-bar { background: var(--felt); color: var(--card); }
+.kind-bar .act:not(.primary) { color: var(--ink); }
+
+.table { background: var(--felt); border: var(--line) solid var(--ink); border-radius: 22px; box-shadow: var(--shadow); padding: 14px; }
+.seam { height: 4px; background: repeating-linear-gradient(90deg, var(--ink) 0 14px, transparent 14px 24px); opacity: .5; }
+.plaque-in { background: var(--card); border: var(--line) solid var(--ink); border-radius: 999px; box-shadow: 3px 3px 0 var(--ink); font-family: var(--display); }
+.health .cell { border-radius: 50%; border: 2px solid var(--ink); background: var(--card); }
+.health .cell.on { background: var(--red); }
+.wheels { background: var(--wood-dk); border: var(--line) solid var(--ink); border-radius: 16px; padding: 12px; box-shadow: var(--shadow); }
+.wheels.covered { background: repeating-linear-gradient(135deg, var(--wood-dk) 0 18px, var(--walnut) 18px 36px); color: var(--card); font-family: var(--display); }
+.spins .cell { border-radius: 50%; border: 2px solid var(--ink); background: var(--card); }
+.spins .cell.on { background: var(--gilt); }
+.window { background: var(--card); border: var(--line) solid var(--ink); border-radius: 10px; box-shadow: inset 0 calc(var(--cell) * .9) 0 -2px rgba(46, 31, 43, .18), inset 0 calc(var(--cell) * -.9) 0 -2px rgba(46, 31, 43, .18); }
+.window::after { content: ""; position: absolute; inset: var(--cell) 0; border-block: 3px solid var(--ink); pointer-events: none; }
+.wheel.locked .window { border-color: var(--gilt); outline: 3px solid var(--ink); background: #fff1c9; }
+.wheel.locked { transform: translateY(4px); }
+.face[data-gilded] { background: radial-gradient(circle, transparent 52%, var(--gilt) 53%, var(--gilt) 62%, transparent 63%); }
+.legend .label strong { font-family: var(--display); color: var(--card); text-shadow: 2px 2px 0 var(--ink); }
+.legend .level { color: var(--card); }
+.legend.level-1 .figure { filter: drop-shadow(0 0 0 var(--steel)) drop-shadow(0 0 6px var(--steel)); }
+.legend.level-2 .figure { filter: drop-shadow(0 0 8px var(--gilt)); }
+.energy .cell { background: var(--card); border: 2px solid var(--ink); border-radius: 3px; }
+.legend.seat-red .energy .cell.on { background: var(--red); }
+.legend.seat-blue .energy .cell.on { background: var(--blue); }
+.xp .cell { background: var(--card); border: 1.5px solid var(--ink); }
+.xp .cell.on { background: var(--gilt); }
+.num { color: var(--card); font-weight: 700; }
+.plaque-in .num { color: var(--ink); }
+.plank { background: var(--wood); border: 2px solid var(--ink); border-radius: 3px; box-shadow: 2px 2px 0 var(--ink); }
+.controls { background: var(--card); border: var(--line) solid var(--ink); border-radius: 16px; box-shadow: var(--shadow); }
+.count { font-family: var(--display); padding: 2px 8px; border-radius: 999px; }
+.count.pays { background: var(--gilt); border: 2px solid var(--ink); }
+.log { background: var(--card); border: var(--line) solid var(--ink); border-radius: 16px; box-shadow: var(--shadow); }
+.log li:first-child { font-weight: 700; }
+.table[data-event="hit"] .half:nth-of-type(1), .table[data-event="burst"] .half:nth-of-type(1) { animation: none; }
+.table[data-event="hit"][data-event-side="0"] .half.you .planks,
+.table[data-event="hit"][data-event-side="1"] .half.them .planks,
+.table[data-event="burst"][data-event-side="0"] .half.you .plaque-in,
+.table[data-event="burst"][data-event-side="1"] .half.them .plaque-in,
+.table[data-event="hit"][data-event-side="0"] .half.you .plaque-in,
+.table[data-event="hit"][data-event-side="1"] .half.them .plaque-in { animation: shake .35s ease-in-out; }
+@keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }

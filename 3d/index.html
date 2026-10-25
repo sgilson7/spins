@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Spins · 3D</title>
+  <link rel="stylesheet" href="../shared/base.css?v=feec326eef01">
+  <link rel="stylesheet" href="style.css?v=feec326eef01">
+</head>
+<body data-ready="false" data-view="3d">
+  <svg class="defs" aria-hidden="true">
+    <defs>
+      <symbol id="sym-red" viewBox="0 0 40 40"><rect x="7" y="7" width="26" height="26" rx="5" class="f-red ink"/></symbol>
+      <symbol id="sym-blue" viewBox="0 0 40 40"><path d="M20 3 L37 20 L20 37 L3 20Z" class="f-blue ink"/></symbol>
+      <symbol id="sym-barricade" viewBox="0 0 40 40"><rect x="17" y="15" width="7" height="22" rx="2" class="f-wood-dk ink"/><rect x="5" y="5" width="30" height="13" rx="4" class="f-wood ink"/></symbol>
+      <symbol id="sym-lock" viewBox="0 0 30 30"><path d="M9 14 V10 a6 6 0 0 1 12 0 V14" class="f-none ink"/><rect x="5" y="13" width="20" height="14" rx="3" class="f-gilt ink"/></symbol>
+      <symbol id="art-knight" viewBox="0 0 100 120"><circle cx="50" cy="48" r="26" class="f-skin ink"/><path d="M24 44 Q26 16 50 16 Q74 16 76 44Z" class="f-steel ink"/><path d="M20 116 Q24 74 50 72 Q76 74 80 116Z" class="f-seat ink"/><circle cx="41" cy="54" r="3" class="f-ink"/><circle cx="59" cy="54" r="3" class="f-ink"/><circle cx="34" cy="62" r="5" class="f-cheek"/><circle cx="66" cy="62" r="5" class="f-cheek"/></symbol>
+      <symbol id="art-wizard" viewBox="0 0 100 120"><circle cx="50" cy="52" r="24" class="f-skin ink"/><path d="M22 40 L56 2 L78 40Z" class="f-seat ink"/><path d="M20 116 Q24 78 50 76 Q76 78 80 116Z" class="f-seat ink"/><circle cx="42" cy="56" r="3" class="f-ink"/><circle cx="58" cy="56" r="3" class="f-ink"/><circle cx="35" cy="64" r="5" class="f-cheek"/><circle cx="65" cy="64" r="5" class="f-cheek"/></symbol>
+      <symbol id="art-bowman" viewBox="0 0 100 120"><path d="M22 52 Q22 18 50 18 Q78 18 78 52 L72 70 L28 70Z" class="f-walnut ink"/><circle cx="50" cy="50" r="21" class="f-skin ink"/><path d="M22 116 Q26 78 50 76 Q74 78 78 116Z" class="f-seat ink"/><circle cx="43" cy="52" r="3" class="f-ink"/><circle cx="57" cy="52" r="3" class="f-ink"/><circle cx="37" cy="60" r="5" class="f-cheek"/><circle cx="63" cy="60" r="5" class="f-cheek"/></symbol>
+      <symbol id="art-champion" viewBox="0 0 40 40"><path d="M6 30 L4 10 L13 18 L20 6 L27 18 L36 10 L34 30Z" class="f-gilt ink"/></symbol>
+    </defs>
+  </svg>
+  <header class="bar">
+    <a class="brand" href="../index.html">Spins</a>
+    <nav class="views" aria-label="Views">
+      <a href="../2d/index.html" data-word="view2d"></a>
+      <a href="../3d/index.html" aria-current="page" data-word="view3d"></a>
+      <a href="../pixel/index.html" data-word="viewpixel"></a>
+    </nav>
+    <button id="skip" class="quiet" data-word="skip"></button>
+    <button id="sound" class="quiet" aria-pressed="true"></button>
+  </header>
+  <main>
+    <div id="play" class="play" hidden>
+      <div id="stage" class="stage">
+        <canvas id="view" aria-hidden="true"></canvas>
+        <div id="hud-them" class="hud them"></div>
+        <div id="hud-you" class="hud you"></div>
+        <div id="locks" class="locks"></div>
+        <ol id="log" class="log"></ol>
+      </div>
+      <div id="controls" class="controls"></div>
+    </div>
+    <div id="menu" class="menu"></div>
+    <p id="notice" role="status"></p>
+  </main>
+  <noscript><p>This page needs JavaScript and WebAssembly.</p></noscript>
+  <script type="module" src="main.js?v=feec326eef01"></script>
+</body>
+</html>

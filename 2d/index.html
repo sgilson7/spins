@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Spins · 2D</title>
+  <link rel="stylesheet" href="../shared/base.css?v=feec326eef01">
+  <link rel="stylesheet" href="style.css?v=feec326eef01">
+</head>
+<body data-ready="false" data-view="2d">
+  <!-- The pictures this view draws with, flat in Lowballer's way: thick ink, flat colour. -->
+  <svg class="defs" aria-hidden="true">
+    <defs>
+      <symbol id="sym-red" viewBox="0 0 40 40"><rect x="7" y="7" width="26" height="26" rx="3" class="f-red ink"/><rect x="12" y="11" width="10" height="5" rx="2" class="f-shine"/></symbol>
+      <symbol id="sym-blue" viewBox="0 0 40 40"><path d="M20 3 L37 20 L20 37 L3 20Z" class="f-blue ink"/><path d="M20 9 L27 16 L20 16Z" class="f-shine"/></symbol>
+      <symbol id="sym-barricade" viewBox="0 0 40 40"><rect x="17" y="15" width="7" height="22" rx="2" class="f-wood-dk ink"/><rect x="5" y="5" width="30" height="13" rx="3" class="f-wood ink"/></symbol>
+      <symbol id="sym-lock" viewBox="0 0 30 30"><path d="M9 14 V10 a6 6 0 0 1 12 0 V14" class="f-none ink"/><rect x="5" y="13" width="20" height="14" rx="3" class="f-gilt ink"/></symbol>
+      <symbol id="fig-knight" viewBox="0 0 100 120">
+        <ellipse cx="50" cy="110" rx="40" ry="8" class="f-wood-dk ink"/>
+        <path d="M22 108 Q24 62 50 58 Q76 62 78 108Z" class="f-seat ink"/>
+        <circle cx="50" cy="42" r="22" class="f-skin ink"/>
+        <path d="M27 40 Q28 16 50 15 Q72 16 73 40 L73 46 L27 46Z" class="f-steel ink"/>
+        <rect x="44" y="30" width="12" height="20" class="f-steel ink"/>
+        <circle cx="41" cy="54" r="2.5" class="f-ink"/><circle cx="59" cy="54" r="2.5" class="f-ink"/>
+        <rect x="80" y="40" width="7" height="52" rx="2" class="f-steel ink"/><rect x="73" y="86" width="21" height="6" rx="2" class="f-wood-dk ink"/>
+        <path d="M10 70 h24 v22 q-12 10 -24 0Z" class="f-oak ink"/>
+      </symbol>
+      <symbol id="fig-wizard" viewBox="0 0 100 120">
+        <ellipse cx="50" cy="110" rx="40" ry="8" class="f-wood-dk ink"/>
+        <path d="M20 108 Q26 60 50 58 Q74 60 80 108Z" class="f-seat ink"/>
+        <circle cx="50" cy="46" r="20" class="f-skin ink"/>
+        <path d="M24 36 L56 2 L76 36Z" class="f-seat ink"/><rect x="22" y="32" width="56" height="8" rx="4" class="f-birch ink"/>
+        <circle cx="42" cy="52" r="2.5" class="f-ink"/><circle cx="58" cy="52" r="2.5" class="f-ink"/>
+        <path d="M40 60 Q50 74 60 60" class="f-birch ink"/>
+        <rect x="84" y="30" width="5" height="78" rx="2" class="f-wood-dk ink"/><circle cx="86.5" cy="26" r="8" class="f-gilt ink"/>
+      </symbol>
+      <symbol id="fig-bowman" viewBox="0 0 100 120">
+        <ellipse cx="50" cy="110" rx="40" ry="8" class="f-wood-dk ink"/>
+        <path d="M24 108 Q28 62 50 60 Q72 62 76 108Z" class="f-seat ink"/>
+        <path d="M24 50 Q24 18 50 18 Q76 18 76 50 L70 66 L30 66Z" class="f-walnut ink"/>
+        <circle cx="50" cy="46" r="17" class="f-skin ink"/>
+        <circle cx="43" cy="48" r="2.5" class="f-ink"/><circle cx="57" cy="48" r="2.5" class="f-ink"/>
+        <path d="M84 24 Q102 64 84 104" class="f-none ink"/><path d="M84 24 L84 104" class="f-none thin"/>
+        <rect x="12" y="64" width="9" height="34" rx="3" class="f-walnut ink"/>
+      </symbol>
+      <symbol id="art-knight" viewBox="0 0 100 120"><use href="#fig-knight"/></symbol>
+      <symbol id="art-wizard" viewBox="0 0 100 120"><use href="#fig-wizard"/></symbol>
+      <symbol id="art-bowman" viewBox="0 0 100 120"><use href="#fig-bowman"/></symbol>
+      <symbol id="art-champion" viewBox="0 0 40 40"><path d="M6 30 L4 10 L13 18 L20 6 L27 18 L36 10 L34 30Z" class="f-gilt ink"/></symbol>
+    </defs>
+  </svg>
+  <header class="bar">
+    <a class="brand" href="../index.html">Spins</a>
+    <nav class="views" aria-label="Views">
+      <a href="../2d/index.html" aria-current="page" data-word="view2d"></a>
+      <a href="../3d/index.html" data-word="view3d"></a>
+      <a href="../pixel/index.html" data-word="viewpixel"></a>
+    </nav>
+    <button id="skip" class="quiet" data-word="skip"></button>
+    <button id="sound" class="quiet" aria-pressed="true"></button>
+  </header>
+  <main>
+    <div id="table" class="table" hidden></div>
+    <div id="menu" class="menu"></div>
+    <p id="notice" role="status"></p>
+  </main>
+  <noscript><p>This page needs JavaScript and WebAssembly.</p></noscript>
+  <script type="module" src="../shared/app2d.js?v=feec326eef01"></script>
+</body>
+</html>
