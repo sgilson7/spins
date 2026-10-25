@@ -25,6 +25,7 @@ One row per assumption, surprise or open item. **Kind** is *divergence* (what wa
 | R2.9 | finding | `energy_past_a_full_bar_is_dropped` covered overflow. | The break was not caught: a full bar acts and empties either way. | The test now reads the energy event's value (3 of 3), which carrying over would change. | `tests/breaks.json` | done |
 | R2.10 | finding | The browser check could compare a wheel's CSS position before and after a locked spin. | It raced the animation frame that sets the position. | The board stamps the core's face on each strip (`data-face`), and the check reads that. | `tests/browser/interactions.py` | done |
 | R2.11 | finding | The chooser's thumbnails could sit in `web/img/`. | The page scan reads every file under `web/` as text and failed on binary images. | Moved to `data/img/`; the scan is unchanged. | | done |
+| R2.12 | finding | `every_screen_and_event_finds_its_strings` caught any missing string. | It caught a key only when it filled a whole string; "It hits [you.foe] for 0." reached the 3D log. The person would have seen it. | The check now finds `[a.key]` inside a sentence, and a break row removes a key to prove it. Also: a hit on health already at none now reads "There is no health left to hit.", and "acted 1 times" reads "acted once". | `tests/breaks.json` | done |
 
 ## Strings written by the agent
 

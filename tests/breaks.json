@@ -124,5 +124,12 @@
   "find": "            &scan_core_code(&fs::read_to_string(f).expect(\"read source\")),",
   "replace": "            &scan_core_code(&fs::read_to_string(f).expect(\"read source\").replace(\"i32\", \"f32\")),",
   "test": "view3d_is_held_to_the_core_rules"
+ },
+ {
+  "name": "a string missing inside a sentence is found",
+  "file": "data/strings.json",
+  "find": "\"foe\": \"you\",",
+  "replace": "",
+  "test": "every_screen_and_event_finds_its_strings"
  }
 ]

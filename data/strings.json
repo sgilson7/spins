@@ -105,12 +105,16 @@
     "draw": "A draw",
     "turn": "The match ended on turn {turn} against {name}.",
     "health": "Your health {you}, {name}'s health {them}.",
-    "acts": "Your {legend} acted {n} times."
+    "acts": "Your {legend} acted {n} times.",
+    "acts_one": "Your {legend} acted once.",
+    "acts_none": "Your {legend} did not act."
   },
   "you": {
     "who": "You",
     "whose": "Your",
-    "name": "You"
+    "name": "You",
+    "foe": "you",
+    "foes": "your"
   },
   "them": {
     "whose": "{name}'s"
@@ -137,7 +141,8 @@
     "hit": {
       "barricade": "It breaks {amount} of {foes} Barricade.",
       "health": "It hits {foe} for {amount}.",
-      "over": "It flies over the Barricade and hits {foe} for {amount}."
+      "over": "It flies over the Barricade and hits {foe} for {amount}.",
+      "none": "There is no health left to hit."
     },
     "over": {
       "win": "You win the match.",

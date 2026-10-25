@@ -601,6 +601,7 @@ impl Session {
                 ..
             } => {
                 let key = match (target, over) {
+                    (Target::Health, _) if *amount == 0 => "event.hit.none",
                     (Target::Barricade, _) => "event.hit.barricade",
                     (Target::Health, true) => "event.hit.over",
                     (Target::Health, false) => "event.hit.health",
@@ -856,7 +857,11 @@ impl Session {
         )];
         for slot in 0..2 {
             lines.push(fill(
-                &self.s.get("over.acts"),
+                &self.s.get(match m.stats.acts[0][slot] {
+                    0 => "over.acts_none",
+                    1 => "over.acts_one",
+                    _ => "over.acts",
+                }),
                 &[
                     ("legend", self.legend_name(0, slot)),
                     ("n", m.stats.acts[0][slot].to_string()),
@@ -1078,14 +1083,15 @@ mod tests {
         seen
     }
 
-    /// `"[some.key]"`: what `Strings::get` gives for a key the file lacks.
+    /// `[some.key]`: what `Strings::get` gives for a key the file lacks,
+    /// alone or inside a sentence.
     fn has_missing_key(t: &str) -> bool {
-        t.split("\"[").skip(1).any(|rest| {
+        t.split('[').skip(1).any(|rest| {
             let key: String = rest
                 .chars()
                 .take_while(|c| c.is_ascii_alphanumeric() || *c == '.' || *c == '_')
                 .collect();
-            !key.is_empty() && rest[key.len()..].starts_with("]\"")
+            key.contains('.') && rest[key.len()..].starts_with(']')
         })
     }
 
@@ -1099,6 +1105,7 @@ mod tests {
     #[test]
     fn the_missing_string_checks_can_fail() {
         assert!(has_missing_key(r#"{"a":"[opponent.wenna.name]"}"#));
+        assert!(has_missing_key(r#"{"a":"It hits [you.foe] for 3."}"#));
         assert!(!has_missing_key(r#"{"a":["x"]}"#));
         assert!(has_placeholder(r#"{"a":"hits {foe}"}"#));
         assert!(!has_placeholder(r#"{"a":{"b":1}}"#));
